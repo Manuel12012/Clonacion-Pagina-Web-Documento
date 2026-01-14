@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="flex gap-5 justify-around m-5 border-b border-gray-400 w-auto">
+        <a href="">Probando</a>
+
+        <nav class="flex gap-5 uppercase text-sm">
+            <a class="hover:text-green-300" href="">Inicio</a>
+            <a class="hover:text-green-300" href="">Documentos</a>
+            <a class="hover:text-green-300" href="">Faq</a>
+            <a class="hover:text-green-300" href="">Mi cuenta</a>
+        </nav>
+
+        <input class="border-gray-400 border rounded-3xl p-1" type="search" placeholder="Buscar...">
+
+    </div>
+    <main class="bg-gray-100">
+
+        <h1 class="text-2xl font-semibold m-5">Contrato de arrendamiento de vivienda habitual</h1>
+        <div class="flex gap-5 m-5">
+
+
+            <div id="form-step" class="bg-white border border-gray-400 flex flex-col flex-1"> <!--- Caja de ingreso de valores-->
+                <p id="step-label"></p>
+
+                <input id="step-input" class="rounded-md border border-gray-400" type="text"
+                    placeholder="Ej.C/Rey, 10,2°, C 28003. Lima">
+
+                <button id="prev-btn" class="hidden underline text-gray-500 mt-3">
+                    < Paso anterior
+                </button> <!-- boton anterior-->
+
+                <button id="next-btn" class="bg-green-400 p-2 rounded-md text-white">
+                    Paso siguiente >
+                </button> <!-- boton siguiente-->
+
+                <a class="underline text-gray-400" href="">Modificiar el modelo</a>
+                <a class="underline text-gray-400" href="">Guardalo (y sigue despues)</a>
+            </div> <!-- Fin de caja-->
+
+
+
+
+            <div class="flex-2 border border-gray-400 rounded-lg bg-white shadow-2xl leading-8">
+                <h2 class="font-semibold uppercase text-center">Contrato de Arrendamiento de Vivienda</h2>
+
+                <p class="text-end">En <span data-preview="data-1">_____</span> a <span data-preview="data-2">_____</span></p>
+
+                <h2 class="font-semibold uppercase text-center">Reunidos</h2>
+
+                <p class="font-semibold">De una parte,</p>
+                <p><span data-preview="data-3">_____</span> con DNI/NIF <span data-preview="data-4">_____</span> y con domicilio en: <span
+                    data-preview="data-5">_____</span> . En
+                    adelante, el "Arrendador"</p>
+
+                <p>Y de otra parte,</p>
+
+                <p><span data-preview="data-6">_____</span> con DNI/NIF <span data-preview="data-7">_____</span> y con domicilio en: <span
+                    data-preview="data-8">_____</span> .En
+                    adelante, el "Arrendatario".</p>
+
+                <p>Y que, a continuacion, seran referidas, individualmente como la "Parte" y, de forma conjunta, como
+                    las "Partes". Las Partes, en la calidad con la que actuan, y reconociendose capacidad juridica para
+                    contratar y obligarse, y en especial para el otorgamiento del presente <span>contrato de
+                        arrendamiento de vivienda</span>. En adelante, el "Contrato".</p>
+
+
+            </div>
+
+            <div class="flex-1">
+                <p>Progresion:</p>
+                <progress value="0" max="100"></progress>
+            </div>
+
+        </div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+
+</body>
+
+
+</html>
