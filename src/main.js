@@ -8,19 +8,30 @@ const steps = [
         placeholder: 'Ej. C/Rey, 10, 2°, Lima'
     },
     {
-        id: 'data-2',
-        label: 'Nombre del arrendador',
-        placeholder: 'Ej. Juan Pérez'
+        id: 'metros-vivienda',
+        label: 'Número de metros cuadrados construidos que dispone la vivienda:',
+        placeholder: 'Escribe un numero ejem: 1'
     },
     {
-        id: 'data-3',
-        label: 'DNI del arrendador',
-        placeholder: 'Ej. 12345678'
+        id: 'descripcion-vivienda',
+        label: 'Describa las partes, dependencias o espacios que forman la vivienda:',
+        placeholder: 'ejem: El salon cuenta con cocina americana, tres dormitorios, dos baños, un garaje, etc'
     },
     {
-        id: 'data-4',
-        label: 'DNI del arrendador',
-        placeholder: 'Ej. 12345678'
+        id: 'vivienda-amoblada',
+        label: '¿El arrendador entrega la vivienda amueblada?',
+        placeholder: ''
+    },
+    {
+        id: 'referencia-catastral',
+        label: 'Introduzca la Referencia Catastral de la vivienda:',
+        placeholder: 'Ej. 123C45GJ00678B'
+    },
+    {
+        id: 'referencia-catastral',
+        label: 'Introduzca la Referencia Catastral de la vivienda:',
+        placeholder: 'Ej. 123C45GJ00678B',
+        type: "checkbox"
     }
     
 ]
@@ -40,6 +51,7 @@ function renderStep() {
     const step = steps[currentStep]
 
     label.textContent = step.label
+    input.checkbox = step.checkbox
     input.placeholder = step.placeholder
     input.value = values[step.id] || ''
 
