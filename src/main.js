@@ -3,7 +3,7 @@ import './style.css';
 //  Definición de pasos (PRIMERO)
 const steps = [
     {
-        id: 'data-1',
+        id: 'direccion-domicilio',
         label: 'Dirección completa de la vivienda',
         placeholder: 'Ej. C/Rey, 10, 2°, Lima'
     },
@@ -16,7 +16,13 @@ const steps = [
         id: 'data-3',
         label: 'DNI del arrendador',
         placeholder: 'Ej. 12345678'
+    },
+    {
+        id: 'data-4',
+        label: 'DNI del arrendador',
+        placeholder: 'Ej. 12345678'
     }
+    
 ]
 
 // 2 Estado
@@ -47,13 +53,13 @@ nextBtn.addEventListener('click', () => {
 
     values[step.id] = input.value
 
-    const preview = document.querySelector(
+    const previews = document.querySelectorAll(
         `[data-preview="${step.id}"]`
     )
 
-    if (preview) {
-        preview.textContent = input.value || '_____'
-    }
+    previews.forEach(preview => {
+    preview.textContent = input.value || '_____'
+    })
 
     if (currentStep < steps.length - 1) {
         currentStep++
