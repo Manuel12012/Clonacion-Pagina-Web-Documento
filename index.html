@@ -1,90 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="flex gap-5 justify-around m-5 border-b border-gray-400 w-auto">
-        <a href="">Probando</a>
+      <a href="">Probando</a>
 
-        <nav class="flex gap-5 uppercase text-sm">
-            <a class="hover:text-green-300" href="">Inicio</a>
-            <a class="hover:text-green-300" href="">Documentos</a>
-            <a class="hover:text-green-300" href="">Faq</a>
-            <a class="hover:text-green-300" href="">Mi cuenta</a>
-        </nav>
+      <nav class="flex gap-5 uppercase text-sm">
+        <a class="hover:text-green-300" href="">Inicio</a>
+        <a class="hover:text-green-300" href="">Documentos</a>
+        <a class="hover:text-green-300" href="">Faq</a>
+        <a class="hover:text-green-300" href="">Mi cuenta</a>
+      </nav>
 
-        <input class="border-gray-400 border rounded-3xl p-1" type="search" placeholder="Buscar...">
-
+      <input
+        class="border-gray-400 border rounded-3xl p-1"
+        type="search"
+        placeholder="Buscar..."
+      />
     </div>
     <main class="bg-gray-100">
+      <h1 class="text-2xl font-semibold m-5">
+        Contrato de arrendamiento de vivienda habitual
+      </h1>
+      <div class="flex gap-5 m-5">
+        <div
+          id="form-step"
+          class="bg-white border border-gray-400 flex flex-col flex-1"
+        >
+          <!--- Caja de ingreso de valores-->
+          <p id="step-label"></p>
 
-        <h1 class="text-2xl font-semibold m-5">Contrato de arrendamiento de vivienda habitual</h1>
-        <div class="flex gap-5 m-5">
+          <input
+            id="step-input"
+            class="rounded-md border border-gray-400"
+            type="text"
+            placeholder="Ej.C/Rey, 10,2°, C 28003. Lima"
+          />
 
+          <button id="prev-btn" class="hidden underline text-gray-500 mt-3">
+            < Paso anterior
+          </button>
+          <!-- boton anterior-->
 
-            <div id="form-step" class="bg-white border border-gray-400 flex flex-col flex-1"> <!--- Caja de ingreso de valores-->
-                <p id="step-label"></p>
+          <button id="next-btn" class="bg-green-400 p-2 rounded-md text-white">
+            Paso siguiente >
+          </button>
+          <!-- boton siguiente-->
 
-                <input id="step-input" class="rounded-md border border-gray-400" type="text"
-                    placeholder="Ej.C/Rey, 10,2°, C 28003. Lima">
-
-                <button id="prev-btn" class="hidden underline text-gray-500 mt-3">
-                    < Paso anterior
-                </button> <!-- boton anterior-->
-
-                <button id="next-btn" class="bg-green-400 p-2 rounded-md text-white">
-                    Paso siguiente >
-                </button> <!-- boton siguiente-->
-
-                <a class="underline text-gray-400" href="">Modificiar el modelo</a>
-                <a class="underline text-gray-400" href="">Guardalo (y sigue despues)</a>
-            </div> <!-- Fin de caja-->
-
-
-
-
-            <div class="flex-2 border border-gray-400 rounded-lg bg-white shadow-2xl leading-8">
-                <h2 class="font-semibold uppercase text-center">Contrato de Arrendamiento de Vivienda</h2>
-
-                <p class="text-end">En <span data-preview="data-1">_____</span> a <span data-preview="data-2">_____</span></p>
-
-                <h2 class="font-semibold uppercase text-center">Reunidos</h2>
-
-                <p class="font-semibold">De una parte,</p>
-                <p><span data-preview="data-3">_____</span> con DNI/NIF <span data-preview="data-4">_____</span> y con domicilio en: <span
-                    data-preview="data-5">_____</span> . En
-                    adelante, el "Arrendador"</p>
-
-                <p>Y de otra parte,</p>
-
-                <p><span data-preview="data-6">_____</span> con DNI/NIF <span data-preview="data-7">_____</span> y con domicilio en: <span
-                    data-preview="data-8">_____</span> .En
-                    adelante, el "Arrendatario".</p>
-
-                <p>Y que, a continuacion, seran referidas, individualmente como la "Parte" y, de forma conjunta, como
-                    las "Partes". Las Partes, en la calidad con la que actuan, y reconociendose capacidad juridica para
-                    contratar y obligarse, y en especial para el otorgamiento del presente <span>contrato de
-                        arrendamiento de vivienda</span>. En adelante, el "Contrato".</p>
-
-
-            </div>
-
-            <div class="flex-1">
-                <p>Progresion:</p>
-                <progress value="0" max="100"></progress>
-            </div>
-
+          <a class="underline text-gray-400" href="">Modificiar el modelo</a>
+          <a class="underline text-gray-400" href=""
+            >Guardalo (y sigue despues)</a
+          >
         </div>
+        <!-- Fin de caja-->
+
+        <div
+          class="flex-2 border border-gray-400 rounded-lg bg-white shadow-2xl leading-8"
+        >
+          <h2 class="font-semibold uppercase text-center">
+            Contrato de Arrendamiento de Vivienda
+          </h2>
+
+          <p class="text-end">
+            En <span data-preview="data-1">_____</span> a
+            <span data-preview="data-2">_____</span>
+          </p>
+
+          <h2 class="font-semibold uppercase text-center">Reunidos</h2>
+          <!-- REUNIDOS-->
+
+          <p class="font-semibold">De una parte,</p>
+          <p>
+            <span data-preview="data-3">_____</span> con DNI/NIF
+            <span data-preview="data-4">_____</span> y con domicilio en:
+            <span data-preview="data-5">_____</span> . En adelante, el
+            "Arrendador"
+          </p>
+
+          <p>Y de otra parte,</p>
+
+          <p>
+            <span data-preview="data-6">_____</span> con DNI/NIF
+            <span data-preview="data-7">_____</span> y con domicilio en:
+            <span data-preview="data-8">_____</span> .En adelante, el
+            "Arrendatario".
+          </p>
+
+          <p>
+            Y que, a continuacion, seran referidas, individualmente como la
+            "Parte" y, de forma conjunta, como las "Partes". Las Partes, en la
+            calidad con la que actuan, y reconociendose capacidad juridica para
+            contratar y obligarse, y en especial para el otorgamiento del
+            presente
+            <span class="font-bold">contrato de arrendamiento de vivienda</span
+            >. En adelante, el "Contrato".
+          </p>
+
+          <h2>Exponen</h2>
+          <!-- EXPONEN-->
+          <p>
+            I. Que el Arrendador es propietario de la vivienda ubicada en:
+            <span>____</span> , con la siguiente Referencia Catastral:
+            <span>____</span> . La vivienda cuenta con <span>____</span> ,metros
+            cuadrados de superficie, y presenta las siguientes caracteristicas:
+          </p>
+
+          <p>En adelante, la "Vivienda".</p>
+
+          <p>
+            Dicha superficie y composición, así como sus características y
+            estado son perfectamente conocidas y aceptadas por las partes
+            intervinientes en este contrato. No obstante, la Vivienda se
+            arrienda como cuerpo cierto, así, de diferir la superficie real y la
+            aquí descrita, esto no afectará de forma alguna a las condiciones y
+            cláusulas que aquí se fijan, particularmente en lo relativo al
+            precio de la renta.
+          </p>
+
+          <p>
+            II. Que el Arrendador ha exhibido una copia del Certificado de
+            Eficiencia Energética de la Vivienda de acuerdo con lo regulado en
+            el Real Decreto 235/2013, de 5 de abril, por el que se aprueba el
+            procedimiento básico para la certificación de la eficiencia
+            energética de los edificios.
+          </p>
+
+          <p>
+            III. Que el Arrendatario desea arrendar la Vivienda para su uso
+            personal de vivienda habitual, y el Arrendador está interesado en
+            arrendársela, así convienen pactar, de forma expresa y detallada, la
+            oferta y aceptación en arrendamiento de la misma, acordando
+            expresamente otorgar el presente contrato de arrendamiento de
+            vivienda que se rige por las siguientes
+          </p>
+
+          <h2>Clausulas</h2>
+          <!--ClAUSULAS-->
+          <p>PRIMERA. OBJETO</p>
+          <p>
+            El presente Contrato tiene por objeto la constitución y regulación
+            del arrendamiento de la Vivienda entre el Arrendador y el
+            Arrendatario, de acuerdo con las condiciones pactadas en este
+            Contrato. El Arrendatario utilizará la Vivienda exclusivamente como
+            vivienda habitual propia, no pudiéndose variar dicho uso sin
+            consentimiento previo, expreso, y por escrito del Arrendador. El
+            incumplimiento de esto será motivo de resolución del contrato. La
+            Vivienda se pondrá a disposición del Arrendatario con la entrega de
+            llaves, recibiendo la Vivienda en un estado adecuado al fin al que
+            se destina y con conocimiento previo de las características de la
+            misma, especialmente su estado de uso y conservación. La Vivienda es
+            propiedad del Arrendador y deberá serle devuelta, a la finalización
+            del presente contrato, en igual estado de conservación y limpieza
+            con que lo entrega, salvo el desgaste normal y apropiado del mismo.
+            El arrendamiento es global y, en consecuencia, su extinción conjunta
+            y total.
+          </p>
+          <p>SEGUNDA. DURACIÓN Y PRORROGAS</p>
+          <p>
+            El arrendamiento se pacta por el plazo siguiente:
+            <span>____</span> a contar desde el siguiente día:
+            <span>____</span> Llegado el día del vencimiento del Contrato, en
+            caso de tener una duración inferior a cinco años, éste se podrá
+            prorrogar por plazos anuales hasta que el Contrato cumpla un máximo
+            de cinco años, salvo que el Arrendatario manifieste al Arrendador,
+            con treinta días de antelación -como mínimo- a la fecha de
+            terminación del Contrato o de cualquiera de las prórrogas, su
+            voluntad de NO renovarlo. No procederá la prórroga del Contrato
+            hasta los cinco años, si una vez transcurrido el que fuera el primer
+            año de duración del mismo, el Arrendador comunica al Arrendatario su
+            necesidad de hacer uso de la Vivienda para destinarla a vivienda
+            permanente para sí o sus familiares en primer grado de
+            consanguinidad o por adopción, o para su cónyuge en los supuestos de
+            sentencia firme de separación, divorcio o nulidad matrimonial.
+            Llegado este supuesto, el Arrendador debe comunicarlo al
+            Arrendatario con dos meses de antelación -como mínimo- a la fecha en
+            la que la Vivienda se vaya a necesitar. El Arrendatario estará
+            obligado a entregar la Vivienda en dicho plazo, salvo que las Partes
+            acuerden algo distinto. Si se diere el caso que se alcanza el fin
+            del que fuera el quinto año de Contrato, bien por vencimiento del
+            Contrato si tiene una duración inicial igual o superior a cinco
+            años, bien porque el Contrato se prorrogó y alcanzó los cinco años
+            de duración, y cuando las Partes hubiesen notificado a la otra, al
+            menos con cuatro meses de antelación a aquella fecha en el caso del
+            Arrendador y al menos con dos meses de antelación en el caso del
+            Arrendatario, su voluntad de no renovarlo, el Contrato se prorrogará
+            necesariamente por plazos anuales hasta un máximo de tres años más,
+            salvo que el Arrendatario manifieste al Arrendador, con un mes de
+            antelación a la fecha de terminación de cualquiera de las
+            anualidades, su voluntad de no renovar el Contrato. Llegado el
+            momento en el que ha transcurrido el plazo de duración del Contrato
+            y, en su caso, los periodos de prórroga correspondientes, el
+            Arrendatario pondrá a disposición del Arrendador la totalidad de la
+            Vivienda. Además, para ello, no será necesario el previo
+            requerimiento expreso del Arrendador. Esto será de aplicación, salvo
+            que las Partes en su momento, lleguen a un acuerdo para otorgar un
+            nuevo contrato de arrendamiento, o proceder de forma distinta.
+            Igualmente, en su caso, y en virtud del artículo 11 de la Ley de
+            Arrendamientos Urbanos (LAU), el Arrendatario podrá desistir del
+            contrato sin penalización alguna, una vez que hayan transcurrido al
+            menos seis meses de arrendamiento, y siempre que lo comunique al
+            Arrendador con un mínimo de treinta días de antelación a la fecha
+            efectiva del desistimiento. El ejercicio de este derecho de
+            desistimiento sin respetar el preaviso mínimo de un mes podría
+            acarrear el pago de una indemnización por daños y perjuicios
+            equivalente a un mes de renta. No obstante, dado este mismo caso, y
+            en aquel supuesto en que el Arrendatario tenga la voluntad de dar
+            por finalizado el Contrato dentro de los seis primeros meses de
+            vigencia, habrá de indemnizar al Arrendador con el montante que
+            resulte de la suma de las rentas que se devenguen desde que el
+            Arrendatario abandone la Vivienda hasta que se cumple el sexto mes
+            de arrendamiento.
+          </p>
+
+          <p>TERCERA. LA RENTA Y SU ACTUALIZACIÓN</p>
+          <p>
+            La renta pactada por las Partes es <span>____</span> ( <span>____</span> €)
+            mensuales que el Arrendatario pagará al Arrendador El pago de cada
+            una de las mensualidades se realizará dentro de los siete (7)
+            primeros días del mes. El pago se realizará mediante ingreso o
+            transferencia bancaria a favor de la cuenta cuyos datos son: Entidad
+            bancaria: <span>____</span> IBAN identificador de la cuenta: <span>____</span> Titular de la cuenta: <span>
+                ____
+            </span> El
+            comprobante de ingreso o transferencia resultante de la realización
+            de dicha transacción servirá como comprobante o justificante del
+            pago efectuado. Cualquier cambio en la forma de pago deberá ser
+            acordada por escrito por ambas partes. Llegado el caso, a partir del
+            momento en que el Contrato sobrepase un año de duración, la renta
+            satisfecha por el Arrendatario será actualizada, y, específicamente,
+            a partir de la fecha en que se cumpla cada año de vigencia del
+            Contrato y, en caso de prórrogas, al término de las mismas. Este
+            incremento se realizará por referencia al Índice de Garantía de
+            Competitividad (IGC) fijado por el Instituto Nacional de Estadística
+            u organismo que lo sustituya. La revisión se efectuará por años
+            naturales, tomando como mes de referencia el que corresponda al
+            último índice que estuviera publicado en la fecha de revisión del
+            Contrato. En todo caso, el incremento producido como consecuencia de
+            la actualización anual de la renta no podrá exceder del resultado de
+            aplicar la variación porcentual experimentada por el índice de
+            Precios al Consumo a fecha de cada actualización. La renta
+            actualizada será exigible al Arrendatario a partir del mes siguiente
+            a aquel en que la parte interesada se lo notifique por escrito,
+            expresando el porcentaje de alteración aplicado y acompañando la
+            oportuna certificación del Instituto Nacional de Estadística. El
+            incumplimiento por el Arrendatario de la obligación de pago de la
+            renta en el periodo fijado será motivo de resolución del contrato,
+            debiendo en tal caso restituir inmediatamente la Vivienda al
+            Arrendador. En este caso, el Arrendatario asumirá los gastos que la
+            resolución pudiera ocasionar, así como el interés de demora
+            legalmente establecido.
+          </p>
+        </div>
+        <!-- FIn de contrato de vivienda-->
+
+        <div class="flex-1">
+          <p>Progresion:</p>
+          <progress value="0" max="100"></progress>
+        </div>
+      </div>
     </main>
     <script type="module" src="/src/main.js"></script>
-
-</body>
-
-
+  </body>
 </html>
