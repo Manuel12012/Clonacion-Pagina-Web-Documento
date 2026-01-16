@@ -1,88 +1,172 @@
 import './style.css';
 
 //  Definición de pasos (PRIMERO)
+/***********************
+ * 1️⃣ CONFIGURACIÓN
+ ***********************/
 const steps = [
-    {
-        id: 'direccion-domicilio',
-        label: 'Dirección completa de la vivienda',
-        placeholder: 'Ej. C/Rey, 10, 2°, Lima'
-    },
-    {
-        id: 'metros-vivienda',
-        label: 'Número de metros cuadrados construidos que dispone la vivienda:',
-        placeholder: 'Escribe un numero ejem: 1'
-    },
-    {
-        id: 'descripcion-vivienda',
-        label: 'Describa las partes, dependencias o espacios que forman la vivienda:',
-        placeholder: 'ejem: El salon cuenta con cocina americana, tres dormitorios, dos baños, un garaje, etc'
-    },
-    {
-        id: 'vivienda-amoblada',
-        label: '¿El arrendador entrega la vivienda amueblada?',
-        placeholder: ''
-    },
-    {
-        id: 'referencia-catastral',
-        label: 'Introduzca la Referencia Catastral de la vivienda:',
-        placeholder: 'Ej. 123C45GJ00678B'
-    },
-    {
-        id: 'referencia-catastral',
-        label: 'Introduzca la Referencia Catastral de la vivienda:',
-        placeholder: 'Ej. 123C45GJ00678B',
-        type: "checkbox"
-    }
-    
+  {
+    id: 'direccion-domicilio',
+    label: 'Dirección completa de la vivienda',
+    type: 'input',
+    inputType: 'text',
+    placeholder: 'Ej. C/Rey, 10, 2°, Lima'
+  },
+  {
+    id: 'metros-vivienda',
+    label: 'Número de metros cuadrados construidos',
+    type: 'input',
+    inputType: 'number',
+    placeholder: 'Ej. 120'
+  },
+  {
+    id: 'descripcion-vivienda',
+    label: 'Describa las partes de la vivienda',
+    type: 'textarea',
+    placeholder: 'Salón, cocina americana, dormitorios...'
+  },
+{
+  id: 'equipamiento-vivienda',
+  label: '¿Esta amoblada?',
+  type: 'radio-group',
+  options: [
+   "si",
+   "no"
+  ]
+}
 ]
 
-// 2 Estado
+
 let currentStep = 0
 const values = {}
 
-// 3️ Elementos
+/***********************
+ * 2️⃣ ELEMENTOS DOM
+ ***********************/
 const label = document.querySelector('#step-label')
-const input = document.querySelector('#step-input')
+const container = document.querySelector('#input-container')
 const nextBtn = document.querySelector('#next-btn')
 const prevBtn = document.querySelector('#prev-btn')
 
-// 4️ Render
+/***********************
+ * 3️⃣ RENDER DINÁMICO
+ ***********************/
 function renderStep() {
-    const step = steps[currentStep]
+  const step = steps[currentStep]
 
-    label.textContent = step.label
-    input.checkbox = step.checkbox
-    input.placeholder = step.placeholder
-    input.value = values[step.id] || ''
+  label.textContent = step.label
+  container.innerHTML = ''
 
-    prevBtn.classList.toggle('hidden', currentStep === 0)
+  let element
+
+  switch (step.type) {
+    case 'textarea':
+      element = document.createElement('textarea')
+      element.placeholder = step.placeholder || ''
+      element.value = values[step.id] || ''
+      break
+
+    case 'checkbox':
+      element = document.createElement('input')
+      element.type = 'checkbox'
+      element.checked = values[step.id] || false
+      break
+
+    case 'select':
+      element = document.createElement('select')
+      step.options.forEach(opt => {
+        const option = document.createElement('option')
+        option.value = opt
+        option.textContent = opt
+        element.appendChild(option)
+      })
+      element.value = values[step.id] || ''
+      break
+
+case 'radio-group':
+  element = document.createElement('div')
+  element.className = 'flex flex-col gap-2'
+
+  step.options.forEach(option => {
+    const label = document.createElement('label')
+    label.className = 'flex items-center gap-2'
+
+    const radio = document.createElement('input')
+    radio.type = 'radio'
+    radio.name = step.id // 🔥 clave para selección única
+    radio.value = option
+
+    radio.checked = values[step.id] === option
+
+    radio.addEventListener('change', () => {
+      values[step.id] = option
+    })
+
+    label.appendChild(radio)
+    label.appendChild(document.createTextNode(option))
+    element.appendChild(label)
+  })
+  break
+
+
+    default: // input
+      element = document.createElement('input')
+      element.type = step.inputType || 'text'
+      element.placeholder = step.placeholder || ''
+      element.value = values[step.id] || ''
+  }
+
+  element.id = 'dynamic-input'
+  element.className = 'rounded-md border border-gray-400 p-2 w-full'
+
+  container.appendChild(element)
+
+  prevBtn.classList.toggle('hidden', currentStep === 0)
 }
 
 renderStep()
 
+/***********************
+ * 4️⃣ NAVEGACIÓN
+ ***********************/
 nextBtn.addEventListener('click', () => {
-    const step = steps[currentStep]
+  const step = steps[currentStep]
 
-    values[step.id] = input.value
+  if (!['checkbox-group', 'radio-group'].includes(step.type)) {
+    const input = document.querySelector('#dynamic-input')
+    values[step.id] =
+      step.type === 'checkbox'
+        ? input.checked
+        : input.value
+  }
 
-    const previews = document.querySelectorAll(
-        `[data-preview="${step.id}"]`
-    )
+  // preview
+  const previews = document.querySelectorAll(
+    `[data-preview="${step.id}"]`
+  )
 
-    previews.forEach(preview => {
-    preview.textContent = input.value || '_____'
-    })
+  previews.forEach(span => {
+    span.textContent = values[step.id] || '_____'
+  })
 
-    if (currentStep < steps.length - 1) {
-        currentStep++
-        renderStep()
-    }
+  if (currentStep < steps.length - 1) {
+    currentStep++
+    renderStep()
+  }
 })
-
 prevBtn.addEventListener('click', () => {
-    if (currentStep > 0) {
-        currentStep--
-        renderStep()
-    }
+  if (currentStep > 0) {
+    currentStep--
+    renderStep()
+
+    // 🔥 Feedback visual (opcional pero recomendado)
+    console.log(
+      'Volviendo a:',
+      steps[currentStep].id,
+      'Valor:',
+      values[steps[currentStep].id]
+    )
+  }
 })
+
 

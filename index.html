@@ -35,21 +35,25 @@
           <!--- Caja de ingreso de valores-->
           <p id="step-label"></p>
 
-          <input
-            id="step-input"
-            class="rounded-md border border-gray-400"
-            type="text"
-            placeholder="Ej.C/Rey, 10,2°, C 28003. Lima"
-          />
+         <div id="input-container"></div>
 
-          <button id="prev-btn" class="hidden underline text-gray-500 mt-3">
-            < Paso anterior
-          </button>
-          <!-- boton anterior-->
+         
+<button
+  id="prev-btn"
+  type="button"
+  class="hidden underline text-gray-500 mt-3"
+>
+  &lt; Paso anterior
+</button>
 
-          <button id="next-btn" class="bg-green-400 p-2 rounded-md text-white">
-            Paso siguiente >
-          </button>
+<button
+  id="next-btn"
+  type="button"
+  class="bg-green-400 p-2 rounded-md text-white"
+>
+  Paso siguiente &gt;
+</button>
+
           <!-- boton siguiente-->
 
           <a class="underline text-gray-400" href="">Modificiar el modelo</a>
