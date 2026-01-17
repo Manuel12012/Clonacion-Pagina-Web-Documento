@@ -8,7 +8,7 @@ const steps = [
         placeholder: 'Ej. C/Rey, 10, 2°, Lima'
     },
     {
-        id: 'data-2',
+        id: 'nombre-arrendador',
         label: 'Nombre del arrendador',
         placeholder: 'Ej. Juan Pérez'
     },
