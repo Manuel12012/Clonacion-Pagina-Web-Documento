@@ -7,7 +7,7 @@ import './style.css';
 const steps = [
   {
     id: 'direccion-domicilio',
-    label: 'Dirección completa de la vivienda',
+    label: 'Dirección completa de la vivienda que se desea alquilar',
     type: 'input',
     inputType: 'text',
     placeholder: 'Ej. C/Rey, 10, 2°, Lima'

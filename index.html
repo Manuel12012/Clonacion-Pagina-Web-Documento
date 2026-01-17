@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <div class="flex gap-5 justify-around m-5 border-b border-gray-400 w-auto">
+    <div class="flex gap-5 justify-evenly mt-5  border-gray-400 w-auto">
       <a href="">Probando</a>
 
       <nav class="flex gap-5 uppercase text-sm">
@@ -23,36 +23,36 @@
         placeholder="Buscar..."
       />
     </div>
-    <main class="bg-gray-100">
-      <h1 class="text-2xl font-semibold m-5">
+    <main class="bg-slate-50">
+      <h1 class="text-2xl font-semibold m-5 gap-5">
         Contrato de arrendamiento de vivienda habitual
       </h1>
-      <div class="flex gap-5 m-5">
+      <div class="flex basis-[20%] gap-5 m-5 max-w-full ml-20 mr-20">
         <div
           id="form-step"
-          class="bg-white border border-gray-400 flex flex-col flex-1"
+          class="bg-white border border-gray-400 flex flex-col flex-1 p-2 rounded-xl"
         >
           <!--- Caja de ingreso de valores-->
-          <p id="step-label"></p>
+          <p id="step-label" class="m-2 w-full font-semibold"></p>
 
-         <div id="input-container"></div>
+         <div id="input-container" class="m-2 max-w-full"></div>
 
          
-<button
-  id="prev-btn"
-  type="button"
-  class="hidden underline text-gray-500 mt-3"
->
-  &lt; Paso anterior
-</button>
+        <button
+          id="prev-btn"
+          type="button"
+          class="hidden underline text-gray-500 mt-3"
+        >
+          &lt; Paso anterior
+        </button>
 
-<button
-  id="next-btn"
-  type="button"
-  class="bg-green-400 p-2 rounded-md text-white"
->
-  Paso siguiente &gt;
-</button>
+        <button
+          id="next-btn"
+          type="button"
+          class="bg-green-600 p-2 rounded-md text-white max-w-full"
+        >
+          Paso siguiente &gt;
+        </button>
 
           <!-- boton siguiente-->
 
@@ -64,7 +64,7 @@
         <!-- Fin de caja-->
 
         <div
-          class="flex-2 border border-gray-400 rounded-lg bg-white shadow-2xl leading-8"
+          class="basis-[60%] border border-gray-400 rounded-lg bg-white shadow-2xl leading-8 p-5"
         >
           <h2 class="font-semibold uppercase text-center">
             Contrato de Arrendamiento de Vivienda
@@ -263,7 +263,7 @@
         </div>
         <!-- FIn de contrato de vivienda-->
 
-        <div class="flex-1">
+        <div class="basis-[20%]">
           <p>Progresion:</p>
           <progress value="0" max="100"></progress>
         </div>
