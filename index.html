@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <div class="flex gap-5 justify-around m-5 border-b border-gray-400 w-auto">
+    <div class="flex gap-5 justify-evenly mt-5  border-gray-400 w-auto">
       <a href="">Probando</a>
 
       <nav class="flex gap-5 uppercase text-sm">
@@ -23,33 +23,37 @@
         placeholder="Buscar..."
       />
     </div>
-    <main class="bg-gray-100">
-      <h1 class="text-2xl font-semibold m-5">
+    <main class="bg-slate-50">
+      <h1 class="text-2xl font-semibold m-5 gap-5">
         Contrato de arrendamiento de vivienda habitual
       </h1>
-      <div class="flex gap-5 m-5">
+      <div class="flex basis-[20%] gap-5 m-5 max-w-full ml-20 mr-20">
         <div
           id="form-step"
-          class="bg-white border border-gray-400 flex flex-col flex-1"
+          class="bg-white border border-gray-400 flex flex-col flex-1 p-2 rounded-xl"
         >
           <!--- Caja de ingreso de valores-->
-          <p id="step-label"></p>
+          <p id="step-label" class="m-2 w-full font-semibold"></p>
 
-          <input
-            id="step-input"
-            class="rounded-md border border-gray-400"
-            type="text"
-            placeholder="Ej.C/Rey, 10,2°, C 28003. Lima"
-          />
+         <div id="input-container" class="m-2 max-w-full"></div>
 
-          <button id="prev-btn" class="hidden underline text-gray-500 mt-3">
-            < Paso anterior
-          </button>
-          <!-- boton anterior-->
+         
+        <button
+          id="prev-btn"
+          type="button"
+          class="hidden underline text-gray-500 mt-3"
+        >
+          &lt; Paso anterior
+        </button>
 
-          <button id="next-btn" class="bg-green-400 p-2 rounded-md text-white">
-            Paso siguiente >
-          </button>
+        <button
+          id="next-btn"
+          type="button"
+          class="bg-green-600 p-2 rounded-md text-white max-w-full"
+        >
+          Paso siguiente &gt;
+        </button>
+
           <!-- boton siguiente-->
 
           <a class="underline text-gray-400" href="">Modificiar el modelo</a>
@@ -60,7 +64,7 @@
         <!-- Fin de caja-->
 
         <div
-          class="flex-2 border border-gray-400 rounded-lg bg-white shadow-2xl leading-8"
+          class="basis-[60%] border border-gray-400 rounded-lg bg-white shadow-2xl leading-8 p-5"
         >
           <h2 class="font-semibold uppercase text-center">
             Contrato de Arrendamiento de Vivienda
@@ -87,7 +91,7 @@
           <p>
             <span data-preview="data-6">_____</span> con DNI/NIF
             <span data-preview="data-7">_____</span> y con domicilio en:
-            <span data-preview="direccion-domicilio">_____</span> .En adelante, el
+            <span data-preview="direccion-domicilio" class="font-bold">_____</span> .En adelante, el
             "Arrendatario".
           </p>
 
@@ -105,9 +109,10 @@
           <!-- EXPONEN-->
           <p>
             I. Que el Arrendador es propietario de la vivienda ubicada en:
-            <span data-preview="direccion-domicilio">____</span> , con la siguiente Referencia Catastral:
-            <span>____</span> . La vivienda cuenta con <span>____</span> ,metros
+            <span data-preview="direccion-domicilio" class="font-bold">____</span> , con la siguiente Referencia Catastral:
+            <span>____</span> . La vivienda cuenta con <span data-preview="metros-vivienda" class="font-bold">____</span> ,metros
             cuadrados de superficie, y presenta las siguientes caracteristicas:
+            <span data-preview="descripcion-vivienda" class="font-bold"></span>
           </p>
 
           <p>En adelante, la "Vivienda".</p>
@@ -153,7 +158,7 @@
             Vivienda se pondrá a disposición del Arrendatario con la entrega de
             llaves, recibiendo la Vivienda en un estado adecuado al fin al que
             se destina y con conocimiento previo de las características de la
-            misma, especialmente su estado de uso y conservación. La Vivienda es
+            misma, especialmente su estado de uso y conservación. <span data-preview="vivienda-amoblada" class="fon-bold"></span> La Vivienda es
             propiedad del Arrendador y deberá serle devuelta, a la finalización
             del presente contrato, en igual estado de conservación y limpieza
             con que lo entrega, salvo el desgaste normal y apropiado del mismo.
@@ -258,7 +263,7 @@
         </div>
         <!-- FIn de contrato de vivienda-->
 
-        <div class="flex-1">
+        <div class="basis-[20%]">
           <p>Progresion:</p>
           <progress value="0" max="100"></progress>
         </div>
