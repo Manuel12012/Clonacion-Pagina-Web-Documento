@@ -2,8 +2,7 @@ import './style.css';
 
 //  Definición de pasos (PRIMERO)
 /***********************
- * 1️⃣ CONFIGURACIÓN
- ***********************/
+ * 1️⃣ CONFIGURACIÓN **/
 const steps = [
     {
         id: 'direccion-domicilio',
@@ -189,7 +188,7 @@ prevBtn.addEventListener('click', () => {
 
 
 console.log('nextBtn encontrados:', document.querySelectorAll('#next-btn').length);
-console.log('prevBtn encontrados:', document.querySelectorAll('#prev-btn').length);
+console.log('prevBtn encontrados:', document.querySelectorAll('#prev-btn').length)
 
 
 console.log('🚀 main.js cargado');
