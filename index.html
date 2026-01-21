@@ -46,9 +46,9 @@
                     class="bg-white border border-gray-400 flex flex-col flex-1 p-4 rounded-xl shadow-md shadow-black/10">
                     <p id="step-label" class="mx-auto my-2 w-full font-semibold"></p>
 
-                    <div id="input-container" class=""></div>
+                    <div id="input-container" class="contract-field"></div>
 
-                    <button id="prev-btn" type="button" class="hidden bg-gray-400 mx-auto">
+                    <button id="prev-btn" type="button" class="hidden mt-2 bg-gray-400 text-white p-2 rounded-md">
                         &lt; Paso anterior
                     </button>
 
@@ -82,7 +82,7 @@
                     <p>
                         <span data-preview="data-3">_____</span> con DNI/NIF
                         <span data-preview="data-4">_____</span> y con domicilio en:
-                        <span data-preview="data-5"">_____</span> . En adelante, el
+                        <span data-preview="data-5">_____</span> . En adelante, el
             " Arrendador" </p>
 
                             <p>Y de otra parte,</p>
@@ -268,10 +268,18 @@
                 </div>
                 <!-- FIn de contrato de vivienda-->
 
-                <div class="basis-[20%]">
-                    <p>Progresion:</p>
-                    <progress value="0" max="100"></progress>
+                <div class="w-full bg-gray-200 rounded-full h-3 basis-[20%]">
+
+                      
+                    <div
+                      id="progress-bar"
+                      class="bg-green-500 h-3 rounded-full transition-all duration-300"
+                      style="width: 0%"
+                    >
                 </div>
+                <p id="progress-text" class="text-sm text-gray-500 mt-2">
+                  </p>
+                  </div> 
             </div>
     </main>
     <script type="module" src="/src/main.js"></script>
