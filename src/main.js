@@ -9,7 +9,8 @@ const steps = [
         label: 'Dirección completa de la vivienda que se desea alquilar',
         type: 'input',
         inputType: 'text',
-        placeholder: 'Ej. C/Rey, 10, 2°, Lima'
+        placeholder: 'Ej. C/Rey, 10, 2°, Lima',
+        tooltip: 'Incluya calle, número, piso y ciudad.'
     },
     {
         id: 'metros-vivienda',
@@ -35,7 +36,6 @@ const steps = [
     }
 ]
 
-
 let currentStep = 0;
 const totalSteps = steps.length;
 
@@ -55,82 +55,125 @@ const progressBar = document.getElementById("progress-bar")
  * 3️⃣ RENDER DINÁMICO
  ***********************/
 function renderStep() {
-    const step = steps[currentStep]
+    const step = steps[currentStep];
 
-    label.textContent = step.label
-    container.innerHTML = ''
+    label.textContent = step.label;
+    container.innerHTML = '';
 
-    let element
+    // ✅ Wrapper principal
+    const wrapper = document.createElement('div');
+    wrapper.className = 'relative flex items-center gap-2';
 
-    switch (step.type) {
-        case 'textarea':
-            element = document.createElement('textarea')
-            element.placeholder = step.placeholder || ''
-            element.value = values[step.id] || ''
-            break
+    let element;
 
-        case 'checkbox':
-            element = document.createElement('input')
-            element.type = 'checkbox'
-            element.checked = values[step.id] || false
-            break
+    element.id = 'dynamic-input';
+    element.className = 'rounded-md border border-gray-400 p-2 w-full';
 
-        case 'select':
-            element = document.createElement('select')
-            step.options.forEach(opt => {
-                const option = document.createElement('option')
-                option.value = opt
-                option.textContent = opt
-                element.appendChild(option)
-            })
-            element.value = values[step.id] || ''
-            break
+    // 🔥 Preview en tiempo real
+    element.addEventListener('input', e => {
+        const previews = document.querySelectorAll(
+            `[data-preview="${step.id}"]`
+        );
+        const value = e.target.value || '_____';
+        previews.forEach(span => (span.textContent = value));
+    });
 
-        case 'radio-group':
-            element = document.createElement('div')
-            element.className = 'flex flex-col gap-2'
+    wrapper.appendChild(element);
 
-            step.options.forEach(option => {
-                const label = document.createElement('label')
-                label.className = 'flex items-center gap-2'
+    // 🟢 TOOLTIP CON ÍCONO
+    if (step.tooltip) {
+        const infoBtn = document.createElement('button');
+        infoBtn.type = 'button';
+        infoBtn.textContent = 'ℹ️';
+        infoBtn.className = 'text-gray-400 hover:text-green-600';
 
-                const radio = document.createElement('input')
-                radio.type = 'radio'
-                radio.name = step.id // 🔥 clave para selección única
-                radio.value = option
+        const tooltip = document.createElement('div');
+        tooltip.className = `
+        hidden absolute left-full ml-3 top-1/2 -translate-y-1/2
+        bg-black text-white text-sm rounded-lg p-3 w-64 z-50
+      `;
 
-                radio.checked = values[step.id] === option
+        const content = document.createElement('div');
+        content.className = 'flex justify-between gap-2';
 
-                radio.addEventListener('change', () => {
-                    values[step.id] = option
-                })
+        const text = document.createElement('span');
+        text.textContent = step.tooltip;
 
-                label.appendChild(radio)
-                label.appendChild(document.createTextNode(option))
-                element.appendChild(label)
-            })
-            break
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = '✕';
+        closeBtn.className = 'text-xs';
 
+        closeBtn.addEventListener('click', () => {
+            tooltip.classList.add('hidden');
+        });
 
-        default: // input
-            element = document.createElement('input')
-            element.type = step.inputType || 'text'
-            element.placeholder = step.placeholder || ''
-            element.value = values[step.id] || ''
+        infoBtn.addEventListener('click', () => {
+            tooltip.classList.toggle('hidden');
+        });
+
+        content.appendChild(text);
+        content.appendChild(closeBtn);
+        tooltip.appendChild(content);
+
+        wrapper.appendChild(infoBtn);
+        wrapper.appendChild(tooltip);
     }
 
-    element.id = 'dynamic-input'
-    element.className = 'rounded-md border border-gray-400 p-2 w-full'
+    container.appendChild(wrapper);
 
-    container.appendChild(element)
+    // 🔥 Resaltar preview activo
+    const previews = document.querySelectorAll(
+        `[data-preview="${step.id}"]`
+    );
+    previews.forEach(span => span.classList.add('preview-active'));
 
-    prevBtn.classList.toggle('hidden', currentStep === 0)
+    prevBtn.classList.toggle('hidden', currentStep === 0);
 }
 
 renderStep()
 updateProgress()
 
+function createInput(step){
+    switch (step.type) {
+        case 'textarea':
+            element = document.createElement('textarea');
+            element.placeholder = step.placeholder || '';
+            element.value = values[step.id] || '';
+            break;
 
+        case 'radio-group':
+            element = document.createElement('div');
+            element.className = 'flex flex-col gap-2';
+
+            step.options.forEach(option => {
+                const label = document.createElement('label');
+                label.className = 'flex items-center gap-2';
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = step.id;
+                radio.value = option;
+                radio.checked = values[step.id] === option;
+
+                radio.addEventListener('change', () => {
+                    values[step.id] = option;
+                });
+
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(option));
+                element.appendChild(label);
+            });
+            break;
+
+        default:
+            element = document.createElement('input');
+            element.type = step.inputType || 'text';
+            element.placeholder = step.placeholder || '';
+            element.value = values[step.id] || '';
+    }
+
+
+}
 /***********************
  * 4️⃣ NAVEGACIÓN
  ***********************/
@@ -151,20 +194,28 @@ nextBtn.addEventListener('click', () => {
 
     previews.forEach(span => {
         span.textContent = values[step.id] || '_____';
+        span.classList.remove('preview-active');
     });
 
-    if (currentStep < steps.length - 1) {
+    // 🔥 avanzar paso UNA SOLA VEZ
+    if (currentStep < totalSteps - 1) {
         currentStep++;
         renderStep();
         updateProgress();
     }
 });
 
-
+prevBtn.addEventListener('click', () => {
+    if (currentStep > 0) {
+        currentStep--;
+        renderStep();
+        updateProgress();
+    }
+});
 
 // funcion para calcular progreso
 function updateProgress() {
-    const percentage = (currentStep / (totalSteps-1)) * 100;
+    const percentage = (currentStep / (totalSteps - 1)) * 100;
 
     progressBar.style.width = `${percentage}%`;
 
@@ -175,20 +226,4 @@ function updateProgress() {
 }
 
 
-prevBtn.addEventListener('click', () => {
-    if (currentStep > 0) {
-        currentStep--;
-        renderStep();
-        updateProgress();
-    }
-});
 
-
-
-
-
-console.log('nextBtn encontrados:', document.querySelectorAll('#next-btn').length);
-console.log('prevBtn encontrados:', document.querySelectorAll('#prev-btn').length)
-
-
-console.log('🚀 main.js cargado');
