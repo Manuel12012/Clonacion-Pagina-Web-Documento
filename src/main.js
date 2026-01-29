@@ -57,83 +57,39 @@ const progressBar = document.getElementById("progress-bar")
 function renderStep() {
     const step = steps[currentStep];
 
-    label.textContent = step.label;
-    container.innerHTML = '';
+    setLabel(step);
+    clearContainer();
 
-    // ✅ Wrapper principal
-    const wrapper = document.createElement('div');
-    wrapper.className = 'relative flex items-center gap-2';
+    const input = createInput(step);
 
-    let element;
+     //  Preview en tiempo real
+    if(step.type !== "radio-group"){
+        attachPreviewSync(input,step.id);
+    }
 
-    element.id = 'dynamic-input';
-    element.className = 'rounded-md border border-gray-400 p-2 w-full';
+    // wrapper
+    const wrapper = createInputWrapper(input);
 
-    // 🔥 Preview en tiempo real
-    element.addEventListener('input', e => {
-        const previews = document.querySelectorAll(
-            `[data-preview="${step.id}"]`
-        );
-        const value = e.target.value || '_____';
-        previews.forEach(span => (span.textContent = value));
-    });
-
-    wrapper.appendChild(element);
-
-    // 🟢 TOOLTIP CON ÍCONO
+    // tooltip si existe
     if (step.tooltip) {
-        const infoBtn = document.createElement('button');
-        infoBtn.type = 'button';
-        infoBtn.textContent = 'ℹ️';
-        infoBtn.className = 'text-gray-400 hover:text-green-600';
-
-        const tooltip = document.createElement('div');
-        tooltip.className = `
-        hidden absolute left-full ml-3 top-1/2 -translate-y-1/2
-        bg-black text-white text-sm rounded-lg p-3 w-64 z-50
-      `;
-
-        const content = document.createElement('div');
-        content.className = 'flex justify-between gap-2';
-
-        const text = document.createElement('span');
-        text.textContent = step.tooltip;
-
-        const closeBtn = document.createElement('button');
-        closeBtn.textContent = '✕';
-        closeBtn.className = 'text-xs';
-
-        closeBtn.addEventListener('click', () => {
-            tooltip.classList.add('hidden');
-        });
-
-        infoBtn.addEventListener('click', () => {
-            tooltip.classList.toggle('hidden');
-        });
-
-        content.appendChild(text);
-        content.appendChild(closeBtn);
-        tooltip.appendChild(content);
-
+        const { infoBtn, tooltip } = createTooltip(step.tooltip);
         wrapper.appendChild(infoBtn);
         wrapper.appendChild(tooltip);
     }
 
     container.appendChild(wrapper);
 
-    // 🔥 Resaltar preview activo
-    const previews = document.querySelectorAll(
-        `[data-preview="${step.id}"]`
-    );
-    previews.forEach(span => span.classList.add('preview-active'));
-
-    prevBtn.classList.toggle('hidden', currentStep === 0);
+    activarPreviews(step.id);
+    updateNavigation();
 }
 
 renderStep()
 updateProgress()
 
+// FUNCIONES
 function createInput(step){
+     let element;
+
     switch (step.type) {
         case 'textarea':
             element = document.createElement('textarea');
@@ -172,7 +128,76 @@ function createInput(step){
             element.value = values[step.id] || '';
     }
 
+    element.id = 'dynamic-input';
+    element.className = 'rounded-md border border-gray-400 p-2 w-full';
 
+    return element;
+
+}
+
+function createInputWrapper(input){
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'relative flex items-center gap-2';
+        wrapper.appendChild(input);
+
+        return wrapper;
+}
+
+function createTooltip(text){
+        const infoBtn = document.createElement('button');
+            infoBtn.type = 'button';
+            infoBtn.textContent = 'ℹ️';
+            infoBtn.className = 'text-gray-400 hover:text-green-600';
+
+        const tooltip = document.createElement('div');
+            tooltip.className = `
+            hidden absolute left-full ml-3 top-1/2 -translate-y-1/2
+            bg-black text-white text-sm rounded-lg p-3 w-64 z-50
+        `;
+
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = '✕';
+        closeBtn.className = 'text-xs';
+
+        closeBtn.addEventListener('click', () => {
+            tooltip.classList.add('hidden');
+        });
+
+        infoBtn.addEventListener('click', () => {
+            tooltip.classList.toggle('hidden');
+        });
+
+        tooltip.appendChild(closeBtn);
+        tooltip.appendChild(document.createTextNode(text));
+        return{infoBtn,tooltip};
+}
+
+function attachPreviewSync(input, stepId){
+        input.addEventListener('input', e => {
+            const previews = document.querySelectorAll(
+                `[data-preview="${stepId}"]`
+            );
+            const value = e.target.value || '_____';
+            previews.forEach(span => (span.textContent = value));
+        });
+}
+
+function updateNavigation(){
+    prevBtn.classList.toggle('hidden', currentStep === 0);
+}
+
+function activarPreviews(stepId){
+        document.querySelectorAll( `[data-preview="${stepId}"]`).
+        forEach(span => span.classList.add('preview-active'));
+    }
+// HELPERS
+function setLabel(step){
+    label.textContent = step.label;
+}
+
+function clearContainer(){
+    container.innerHTML = '';   
 }
 /***********************
  * 4️⃣ NAVEGACIÓN
