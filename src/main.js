@@ -88,7 +88,7 @@ updateProgress()
 
 // FUNCIONES
 function createInput(step){
-     let element;
+        let element;
 
     switch (step.type) {
         case 'textarea':
@@ -158,14 +158,27 @@ function createTooltip(text){
 
         const closeBtn = document.createElement('button');
         closeBtn.textContent = '✕';
-        closeBtn.className = 'text-xs';
+        closeBtn.className = 'text-xs mr-1';
+
+        function cerrarSiClickAfuera(e){
+            if(!tooltip.contains(e.target) && !infoBtn.contains(e.target)){
+                tooltip.classList.add("hidden")
+                document.removeEventListener('click', cerrarSiClickAfuera);
+            }
+}
 
         closeBtn.addEventListener('click', () => {
             tooltip.classList.add('hidden');
+             document.removeEventListener('click', cerrarSiClickAfuera);
         });
 
-        infoBtn.addEventListener('click', () => {
+        infoBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             tooltip.classList.toggle('hidden');
+
+            if (!tooltip.classList.contains('hidden')) {
+                document.addEventListener('click', cerrarSiClickAfuera);
+            }
         });
 
         tooltip.appendChild(closeBtn);
@@ -183,6 +196,7 @@ function attachPreviewSync(input, stepId){
         });
 }
 
+
 function updateNavigation(){
     prevBtn.classList.toggle('hidden', currentStep === 0);
 }
@@ -190,6 +204,38 @@ function updateNavigation(){
 function activarPreviews(stepId){
         document.querySelectorAll( `[data-preview="${stepId}"]`).
         forEach(span => span.classList.add('preview-active'));
+    }
+
+        function avanzarPaso(){
+ // 🔥 avanzar paso UNA SOLA VEZ
+        if (currentStep < totalSteps - 1) {
+            currentStep++;
+            renderStep();
+            updateProgress();
+        }
+    }
+
+    function almacenarPreview(stepId){
+        const previews = document.querySelectorAll(
+            `[data-preview="${stepId}"]`
+        );
+
+        previews.forEach(span => {
+        span.textContent = values[stepId] || '_____';
+        span.classList.remove('preview-active');
+    });
+    }
+
+    function guardarValor(step){
+   if (['checkbox-group', 'radio-group'].includes(step.type)) {
+    return;
+    }
+
+            const input = document.querySelector('#dynamic-input');
+        values[step.id] =
+            step.type === 'checkbox'
+                ? input.checked
+                : input.value;
     }
 // HELPERS
 function setLabel(step){
@@ -205,29 +251,9 @@ function clearContainer(){
 nextBtn.addEventListener('click', () => {
     const step = steps[currentStep];
 
-    if (!['checkbox-group', 'radio-group'].includes(step.type)) {
-        const input = document.querySelector('#dynamic-input');
-        values[step.id] =
-            step.type === 'checkbox'
-                ? input.checked
-                : input.value;
-    }
-
-    const previews = document.querySelectorAll(
-        `[data-preview="${step.id}"]`
-    );
-
-    previews.forEach(span => {
-        span.textContent = values[step.id] || '_____';
-        span.classList.remove('preview-active');
-    });
-
-    // 🔥 avanzar paso UNA SOLA VEZ
-    if (currentStep < totalSteps - 1) {
-        currentStep++;
-        renderStep();
-        updateProgress();
-    }
+    guardarValor(step);
+    almacenarPreview(step.id);
+    avanzarPaso();
 });
 
 prevBtn.addEventListener('click', () => {
