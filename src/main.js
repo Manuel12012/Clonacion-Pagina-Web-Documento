@@ -1,8 +1,6 @@
 import './style.css';
 
-//  Definición de pasos (PRIMERO)
-/***********************
- * 1️⃣ CONFIGURACIÓN **/
+// definicion de objetos
 const steps = [
     {
         id: 'direccion-domicilio',
@@ -17,7 +15,9 @@ const steps = [
         label: 'Número de metros cuadrados construidos',
         type: 'input',
         inputType: 'number',
-        placeholder: 'Ej. 120'
+        placeholder: 'Ej. 120',
+        tooltip: 'Incluya numero de metros cuadrados'
+
     },
     {
         id: 'descripcion-vivienda',
@@ -169,7 +169,7 @@ function createTooltip(text){
 
         closeBtn.addEventListener('click', () => {
             tooltip.classList.add('hidden');
-             document.removeEventListener('click', cerrarSiClickAfuera);
+                document.removeEventListener('click', cerrarSiClickAfuera);
         });
 
         infoBtn.addEventListener('click', (e) => {
